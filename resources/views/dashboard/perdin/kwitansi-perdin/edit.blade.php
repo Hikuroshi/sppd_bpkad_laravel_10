@@ -91,6 +91,7 @@
 									<th class="border-bottom-0">Nama</th>
 									<th class="border-bottom-0">NIP</th>
 									<th class="border-bottom-0">Pangkat</th>
+									<th class="border-bottom-0">Lama Perjalanan</th>
 									<th class="border-bottom-0">Uang Harian</th>
 									<th class="border-bottom-0">Uang Transport</th>
 									<th class="border-bottom-0">Uang Tiket</th>
@@ -105,8 +106,9 @@
 									<td>{{ $pegawai->nama }}</td>
 									<td>{{ $pegawai->nip }}</td>
 									<td>{{ $pegawai->pangkat->nama ?? '-'}}</td>
+									<td ><input type="text" class="form-control" id="lama_perjalanan" value=" {{$lama_perjalanan ?? '-'}}" readonly></td>
 									<td>
-										<input name="uang_harian[{{ $pegawai->id }}]" value="{{ old('uang_harian.' . $pegawai->id, $pegawai->pivot->uang_harian) }}" type="number" class="form-control @error('uang_harian.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Harian" required>
+										<input name="uang_harian[{{ $pegawai->id }}]" value="{{ number_format(old('uang_harian.' . $pegawai->id, $pegawai->pivot->uang_harian),0,",",".") }}" type="text" class="form-control @error('uang_harian.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Harian" id="uangmasuk" required>
 										@error('uang_harian.' . $pegawai->id)
 										<div class="invalid-feedback">
 											{{ $message }}
@@ -114,7 +116,7 @@
 										@enderror
 									</td>
 									<td>
-										<input name="uang_transport[{{ $pegawai->id }}]" value="{{ old('uang_transport.' . $pegawai->id, $pegawai->pivot->uang_transport) }}" type="number" class="form-control @error('uang_transport.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Transport" required>
+										<input name="uang_transport[{{ $pegawai->id }}]" value="{{ number_format(old('uang_transport.' . $pegawai->id, $pegawai->pivot->uang_transport),0,",",".") }}" type="text" class="form-control @error('uang_transport.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Transport" id="uangtransport" required>
 										@error('uang_transport.' . $pegawai->id)
 										<div class="invalid-feedback">
 											{{ $message }}
@@ -122,7 +124,7 @@
 										@enderror
 									</td>
 									<td>
-										<input name="uang_tiket[{{ $pegawai->id }}]" value="{{ old('uang_tiket.' . $pegawai->id, $pegawai->pivot->uang_tiket) }}" type="number" class="form-control @error('uang_tiket.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Tiket" required>
+										<input name="uang_tiket[{{ $pegawai->id }}]" value="{{ number_format(old('uang_tiket.' . $pegawai->id, $pegawai->pivot->uang_tiket),0,",",".") }}" type="text" class="form-control @error('uang_tiket.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Tiket" id="uangtiket" required>
 										@error('uang_tiket.' . $pegawai->id)
 										<div class="invalid-feedback">
 											{{ $message }}
@@ -130,7 +132,7 @@
 										@enderror
 									</td>
 									<td>
-										<input name="uang_penginapan[{{ $pegawai->id }}]" value="{{ old('uang_penginapan.' . $pegawai->id, $pegawai->pivot->uang_penginapan) }}" type="number" class="form-control @error('uang_penginapan.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Tiket" required>
+										<input name="uang_penginapan[{{ $pegawai->id }}]" value="{{ number_format(old('uang_penginapan.' . $pegawai->id, $pegawai->pivot->uang_penginapan),0,",",".") }}" type="text" class="form-control @error('uang_penginapan.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Tiket" id="uangpenginapan" required>
 										@error('uang_penginapan.' . $pegawai->id)
 										<div class="invalid-feedback">
 											{{ $message }}
@@ -143,6 +145,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
+									<th></th>
 									<th colspan="4" class="text-end">Total :</th>
 									<td>0</td>
 									<td>0</td>
@@ -152,6 +155,11 @@
 								</tr>
 							</tfoot>
 						</table>
+					</div>
+					<div class="row row-sm p-3">
+						<div class="col-sm-12">
+							<p>* Kusus untuk uang harian dan uang penginapan akan dikalikan dengan lama perjalanan (hari).</p>
+						</div>
 					</div>
 
 					<div class="row row-sm p-3">
@@ -234,6 +242,8 @@
 @endif
 
 <script>
+	
+
 	function formatToRupiah(angka) {
 		return new Intl.NumberFormat('id-ID', {
 			style: 'currency',
@@ -242,12 +252,42 @@
 		}).format(angka);
 	}
 
+	    var lama_perjalanan = document.getElementById("lama_perjalanan").value;
+		// lama_perjalanan = lama_perjalanan.split(" ");
+		// lama_perjalanan = lama_perjalanan[0];
+		
+		// console.log(lama_perjalanan);
+
 	$(document).ready(function() {
+		
 		function hitungTotalPerBaris(row) {
-			let uangHarian = parseFloat(row.find('input[name^="uang_harian"]').val()) || 0;
-			let uangTransport = parseFloat(row.find('input[name^="uang_transport"]').val()) || 0;
-			let uangTiket = parseFloat(row.find('input[name^="uang_tiket"]').val()) || 0;
-			let uangPenginapan = parseFloat(row.find('input[name^="uang_penginapan"]').val()) || 0;
+			//input harian
+			input_harian1 = row.find('input[name^="uang_harian"]').val();
+			input_harian1 = input_harian1.split(".");
+			input_harian1 = input_harian1.join("");
+			input_harian1 = (input_harian1*lama_perjalanan);
+
+			//input harian
+			input_transport1 = row.find('input[name^="uang_transport"]').val();
+			input_transport1 = input_transport1.split(".");
+			input_transport1 = input_transport1.join("");
+
+			//input harian
+			input_tiket1 = row.find('input[name^="uang_tiket"]').val();
+			input_tiket1 = input_tiket1.split(".");
+			input_tiket1 = input_tiket1.join("");
+
+			//input harian
+			input_penginapan1 = row.find('input[name^="uang_penginapan"]').val();
+			input_penginapan1 = input_penginapan1.split(".");
+			input_penginapan1 = input_penginapan1.join("");
+			input_penginapan1 = (input_penginapan1*lama_perjalanan);
+
+			
+			let uangHarian = parseFloat(input_harian1) || 0;
+			let uangTransport = parseFloat(input_transport1) || 0;
+			let uangTiket = parseFloat(input_tiket1) || 0;
+			let uangPenginapan = parseFloat(input_penginapan1) || 0;
 
 			let total = uangHarian + uangTransport + uangTiket + uangPenginapan;
 			row.find('td:last-child').text(formatToRupiah(total));
@@ -261,17 +301,41 @@
 			totalPenginapan = 0;
 
 			$('#pegawai_table tbody tr').each(function() {
+				
 				let rowTotal = hitungTotalPerBaris($(this));
-				totalHarian += parseFloat($(this).find('input[name^="uang_harian"]').val()) || 0;
-				totalTransport += parseFloat($(this).find('input[name^="uang_transport"]').val()) || 0;
-				totalTiket += parseFloat($(this).find('input[name^="uang_tiket"]').val()) || 0;
-				totalPenginapan += parseFloat($(this).find('input[name^="uang_penginapan"]').val()) || 0;
+				//input harian
+				input_harian = $(this).find('input[name^="uang_harian"]').val();
+				input_harian = input_harian.split(".");
+				input_harian = input_harian.join("");
+				// input_harian = (input_harian*lama_perjalanan);
+
+				//input harian
+				input_transport = $(this).find('input[name^="uang_transport"]').val();
+				input_transport = input_transport.split(".");
+				input_transport = input_transport.join("");
+
+				//input harian
+				input_tiket = $(this).find('input[name^="uang_tiket"]').val();
+				input_tiket = input_tiket.split(".");
+				input_tiket = input_tiket.join("");
+
+				//input harian
+				input_penginapan = $(this).find('input[name^="uang_penginapan"]').val();
+				input_penginapan = input_penginapan.split(".");
+				input_penginapan = input_penginapan.join("");
+				// input_penginapan = (input_penginapan*lama_perjalanan);
+
+
+				totalHarian += parseFloat(input_harian*lama_perjalanan) || 0;
+				totalTransport += parseFloat(input_transport) || 0;
+				totalTiket += parseFloat(input_tiket) || 0;
+				totalPenginapan += parseFloat(input_penginapan*lama_perjalanan) || 0;
 			});
 
-			$('tfoot tr td:nth-child(2)').text(formatToRupiah(totalHarian));
-			$('tfoot tr td:nth-child(3)').text(formatToRupiah(totalTransport));
-			$('tfoot tr td:nth-child(4)').text(formatToRupiah(totalTiket));
-			$('tfoot tr td:nth-child(5)').text(formatToRupiah(totalPenginapan));
+			$('tfoot tr td:nth-child(3)').text(formatToRupiah(totalHarian));
+			$('tfoot tr td:nth-child(4)').text(formatToRupiah(totalTransport));
+			$('tfoot tr td:nth-child(5)').text(formatToRupiah(totalTiket));
+			$('tfoot tr td:nth-child(6)').text(formatToRupiah(totalPenginapan));
 
 			let totalKeseluruhan = totalHarian + totalTransport + totalTiket + totalPenginapan;
 			$('tfoot tr td:last-child').text(formatToRupiah(totalKeseluruhan));
@@ -292,6 +356,51 @@
 	function loadContent(url, iframeId) {
         var iframe = document.getElementById(iframeId);
         iframe.src = url;
+    }
+
+	var uangharian = document.getElementById('uangharian');
+    uangharian.addEventListener('keyup', function(e)
+    {
+        uangharian.value = formatRupiah(this.value);
+    });
+
+
+	var uangtransport = document.getElementById('uangtransport');
+    uangtransport.addEventListener('keyup', function(e)
+    {
+        uangtransport.value = formatRupiah(this.value);
+    });
+
+
+	var uangpenginapan = document.getElementById('uangpenginapan');
+    uangpenginapan.addEventListener('keyup', function(e)
+    {
+        uangpenginapan.value = formatRupiah(this.value);
+    });
+
+	
+	var uangtiket = document.getElementById('uangtiket');
+    uangtiket.addEventListener('keyup', function(e)
+    {
+        uangtiket.value = formatRupiah(this.value);
+    });
+    
+    /* Fungsi */
+    function formatRupiah(angka, prefix)
+    {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split    = number_string.split(','),
+            sisa     = split[0].length % 3,
+            rupiah     = split[0].substr(0, sisa),
+            ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+            
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+        
+        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+        return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
     }
 </script>
 

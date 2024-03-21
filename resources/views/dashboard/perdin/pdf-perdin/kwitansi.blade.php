@@ -93,19 +93,22 @@
 		<div style="text-align: center; margin: 0 0 5px 0;">
 			<h4 style="text-decoration: underline; word-spacing: 5px;">KWITANSI (TANDA PEMBAYARAN)</h4>
 		</div>
+		<div style="text-align: center; margin: 0 0 5px 0;">
+			<H5 style="word-spacing: 5px;">SUDAH TERIMA DARI KUASA PENGGUNA ANGGARAN BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH PROVINSI BANTEN</H5>
+		</div>
 
 		<table class="gap-t" style="width: 100%; border-collapse: collapse;">
-			<tr>
+			{{-- <tr>
 				<td style="white-space: nowrap;">Sudah Terima Dari</td>
 				<td>: Kuasa Pengguna Anggaran Badan Pengelolaan Keuangan Dan Aset Daerah Provinsi Banten</td>
-			</tr>
+			</tr> --}}
 			<tr>
 				<td style="white-space: nowrap;">Banyaknya</td>
 				<td style="text-transform: capitalize">: {{ $kwitansi_perdin->terbilang($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan + $kwitansi_perdin->bbm + $kwitansi_perdin->tol) }} Rupiah</td>
 			</tr>
 			<tr>
 				<td style="white-space: nowrap;">Rp.</td>
-				<td>: {{ number_format($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan + $kwitansi_perdin->bbm + $kwitansi_perdin->tol, 0, ',', '.') }}</td>
+				<td>: {{ number_format(($lama_perjalanan*$pegawai->pivot->uang_harian) + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + ($lama_perjalanan*$pegawai->pivot->uang_penginapan) + $kwitansi_perdin->bbm + $kwitansi_perdin->tol, 0, ',', '.') }}</td>
 			</tr>
 			<tr>
 				<td style="white-space: nowrap;">Yaitu untuk</td>
@@ -118,28 +121,33 @@
 				<td>
 					<table class="gap-t t-price" style="width: 100%; border-collapse: collapse;">
 						<tr>
-							<td>Uang Harian</td>
-							<td>= Rp.</td>
-							<td>{{ number_format($pegawai->pivot->uang_harian, 0, ',', '.') }}</td>
-
+							<td>Uang Harian {{$lama_perjalanan}} hari * @ Rp {{ number_format($pegawai->pivot->uang_harian, 0, ',', '.') }}</td>
+							<td>= Rp</td>	
+							@php
+								$jml_harian = $lama_perjalanan*$pegawai->pivot->uang_harian;
+							@endphp
+							<td>{{ number_format($jml_harian, 0, ',', '.') }}</td>
 							<td>Nomor Rekening:</td>
 							<td>{{ $kwitansi_perdin->data_perdin->jenis_perdin->no_rek }}</td>
 							<td>Bank Banten</td>
 						</tr>
 						<tr>
 							<td>Uang Transport</td>
-							<td>= Rp.</td>
+							<td>= Rp</td>
 							<td colspan="4">{{ number_format($pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $kwitansi_perdin->bbm + $kwitansi_perdin->tol, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<td>Uang Akomodasi</td>
-							<td>= Rp.</td>
-							<td colspan="4">{{ number_format($pegawai->pivot->uang_penginapan, 0, ',', '.') }}</td>
+							<td>Uang Penginapan {{$lama_perjalanan}} hari * @ Rp {{number_format($pegawai->pivot->uang_penginapan, 0, ',', '.')}}</td>
+							@php
+								$jml_penginapan = $lama_perjalanan*$pegawai->pivot->uang_penginapan;
+							@endphp
+							<td>= Rp</td>
+							<td colspan="4">{{ number_format($jml_penginapan, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
 							<td>Jumlah</td>
-							<td>= Rp.</td>
-							<td colspan="4">{{ number_format($pegawai->pivot->uang_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $pegawai->pivot->uang_penginapan, 0, ',', '.') }}</td>
+							<td>= Rp</td>
+							<td colspan="4">{{ number_format($jml_harian + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $jml_penginapan, 0, ',', '.') }}</td>
 						</tr>
 					</table>
 				</td>

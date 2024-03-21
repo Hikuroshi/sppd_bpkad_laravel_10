@@ -6,6 +6,7 @@ use App\Models\KegiatanSub;
 use App\Models\KwitansiPerdin;
 use App\Http\Controllers\Controller;
 use App\Models\Pegawai;
+use App\Models\Lama;
 use App\Models\StatusPerdin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ class KwitansiPerdinController extends Controller
     */
     public function index()
     {
+        // return json_encode(KwitansiPerdin::all());
         return view('dashboard.perdin.kwitansi-perdin.index', [
             'title' => 'Daftar Laporan Perdin',
             'kwitansi_perdins' => KwitansiPerdin::all(),
@@ -56,10 +58,15 @@ class KwitansiPerdinController extends Controller
             return abort(404);
         }
 
+       $lama_perjalanan = Lama::where('id',$kwitansiPerdin->data_perdin->lama)
+                ->first()->lama_hari;
+
+        // return json_encode($lama_perjalanan);
         return view('dashboard.perdin.kwitansi-perdin.edit', [
             'title' => 'Perbarui Kwitansi Perdin',
             'kwitansi_perdin' => $kwitansiPerdin,
             'kegiatan_subs' => KegiatanSub::all(),
+            'lama_perjalanan' => $lama_perjalanan
         ]);
     }
 
@@ -68,6 +75,7 @@ class KwitansiPerdinController extends Controller
     */
     public function update(Request $request, KwitansiPerdin $kwitansiPerdin)
     {
+        
         if (!$kwitansiPerdin->data_perdin->status->lap) {
             return abort(404);
         }
@@ -88,11 +96,25 @@ class KwitansiPerdinController extends Controller
 
             foreach ($kwitansiPerdin->pegawais as $pegawai) {
                 $pegawaiId = $pegawai->id;
+                //uang harian
+                $uangharian = explode(".",$request->input("uang_harian.$pegawaiId"));
+                $uangharian = implode("",$uangharian);
+                //uang transport
+                $uangtransport = explode(".",$request->input("uang_transport.$pegawaiId"));
+                $uangtransport = implode("",$uangtransport);
+                //uang tiket
+                $uangtiket = explode(".",$request->input("uang_tiket.$pegawaiId"));
+                $uangtiket = implode("",$uangtiket);
+                //uang penginapan
+                $uangpenginapan = explode(".",$request->input("uang_penginapan.$pegawaiId"));
+                $uangpenginapan = implode("",$uangpenginapan);
+
+        // return json_encode($uangharian);
                 $pegawai->pivot->update([
-                    'uang_harian' => $request->input("uang_harian.$pegawaiId"),
-                    'uang_transport' => $request->input("uang_transport.$pegawaiId"),
-                    'uang_tiket' => $request->input("uang_tiket.$pegawaiId"),
-                    'uang_penginapan' => $request->input("uang_penginapan.$pegawaiId"),
+                    'uang_harian' => $uangharian,
+                    'uang_transport' => $uangtransport,
+                    'uang_tiket' => $uangtiket,
+                    'uang_penginapan' => $uangpenginapan,
                 ]);
             }
 
