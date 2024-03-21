@@ -148,6 +148,10 @@ class DataPerdinController extends Controller
         if (Gate::allows('isSuperOperator') || empty($authBidangId)) {
             $pegawais = Pegawai::all();
         } else {
+            $kpa = Pegawai::whereHas('jabatan', function ($query) {
+                $query->where('nama', 'like', '%Kuasa Pengguna Anggaran%');
+            })->get();
+
             $kabid = Pegawai::whereHas('jabatan', function ($query) {
                         $query->where('nama', 'like', '%Kepala Bidang%');
                     })->get();
@@ -156,7 +160,8 @@ class DataPerdinController extends Controller
                     })->get();
             $pegawai = Pegawai::where('bidang_id', $authBidangId)->get();
 
-            $pegawais = $pegawai->merge($kabid)->merge($sekdis);
+            $pegawais = $pegawai->merge($kabid)->merge($sekdis)->merge($kpa);
+
         }
 
         $ttd_pemberi_perintah = TandaTangan::where('jenis_ttd', 'pemberi_perintah')->get();
