@@ -2,9 +2,9 @@
 function hitungTanggalKembali() {
     let tanggalBerangkat = $('#tgl_berangkat').val();
     let lamaOption = $('#lama_id option:selected');
+    let lama = parseInt(lamaOption.data('lama'));
 
     if (tanggalBerangkat !== '' && !isNaN(lama)) {
-        let lama = parseInt(lamaOption.data('lama'));
         let tanggalKembali = new Date(tanggalBerangkat);
         tanggalKembali.setDate(tanggalKembali.getDate() + lama - 1);
 
