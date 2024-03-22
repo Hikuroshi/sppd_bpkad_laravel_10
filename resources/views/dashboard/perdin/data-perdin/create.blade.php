@@ -145,9 +145,9 @@
 							<div class="form-group">
 								<label for="lama_id" class="form-label">Lamanya Perjalanan Dinas <span class="text-danger">*</span></label>
 								<select name="lama_id" id="lama_id" class="form-control form-select @error('lama_id') is-invalid @enderror">
-									<option data-lama="0" value="">Pilih Lama Hari</option>
+									<option value="" data-lama="0">Pilih Lama Hari</option>
 									@foreach ($lamas as $lama)
-									<option data-lama="{{ $lama->lama_hari }}" value="{{ $lama->id }}" @selected(old('lama_id') == $lama->id)>
+									<option value="{{ $lama->id }}" data-lama="{{ $lama->lama_hari }}" @selected(old('lama_id') == $lama->id)>
 										{{ $lama->lama_hari }} hari
 									</option>
 									@endforeach
