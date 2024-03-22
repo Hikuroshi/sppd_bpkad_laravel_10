@@ -7,64 +7,19 @@
 		<div class="card box-shadow-0 ">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('tanda-tangan.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('jabatan-kedua.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
 			<div class="card-body pt-0">
-				<form action="{{ route('tanda-tangan.show', $tanda_tangan->slug) }}" method="post" enctype="multipart/form-data">
+				<form action="{{ route('jabatan-kedua.show', $jabatan_kedua->slug) }}" method="post">
 					@csrf
 					@method('put')
 
 					<div class="form-group">
-						<label for="pegawai_id" class="form-label">Pegawai</label>
-						<select name="pegawai_id" id="pegawai_id" class="form-control form-select select2 @error('pegawai_id') is-invalid @enderror">
-							<option value="">Pilih Pegawai</option>
-							@foreach ($pegawais as $pegawai)
-							<option value="{{ $pegawai->id }}" @selected(old('pegawai_id', $tanda_tangan->pegawai_id) == $pegawai->id)>
-								{{ $pegawai->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('pegawai_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="file_ttd" class="form-label">File Tanda Tangan</label>
-						<input name="file_ttd" accept="image/png" class="form-control @error('file_ttd') is-invalid @enderror" type="file" id="file_ttd">
-						<input type="hidden" name="oldTtd" value="{{ $tanda_tangan->file_ttd }}">
-						@error('file_ttd')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="jabatan_kedua_id" class="form-label">Jabatan Kedua</label>
-						<select name="jabatan_kedua_id" id="jabatan_kedua_id" class="form-control form-select select2 @error('jabatan_kedua_id') is-invalid @enderror">
-							<option value="">Pilih Jabatan Kedua</option>
-							@foreach ($jabatan_keduas as $jabatan_kedua)
-							<option value="{{ $jabatan_kedua->id }}" @selected(old('jabatan_kedua_id', $tanda_tangan->id) == $jabatan_kedua->id)>
-								{{ $jabatan_kedua->nama }}
-							</option>
-							@endforeach
-						</select>
-						@error('jabatan_kedua_id')
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-						@enderror
-					</div>
-					<div class="form-group">
-						<label for="status" class="form-label">Status Tanda Tangan</label>
-						<select name="status" id="status" class="form-control form-select @error('status') is-invalid @enderror">
-							<option value="1" @selected(old('status', $tanda_tangan->status) == 1)>Aktif</option>
-							<option value="0" @selected(old('status', $tanda_tangan->status) == 0)>Tidak Aktif</option>
-						</select>
-						@error('status')
+						<label for="nama">Nama</label>
+						<input name="nama" value="{{ old('nama', $jabatan_kedua->nama) }}" type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" placeholder="Masukan nama">
+						@error('nama')
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

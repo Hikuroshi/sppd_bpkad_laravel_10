@@ -163,12 +163,19 @@ class DataPerdinController extends Controller
             $pegawai = Pegawai::where('bidang_id', $authBidangId)->get();
 
             $pegawais = $pegawai->merge($kabid)->merge($sekdis)->merge($kpa);
-
         }
 
-        $ttd_pemberi_perintah = TandaTangan::where('jenis_ttd', 'pemberi_perintah')->get();
-        $ttd_pptk = TandaTangan::where('jenis_ttd', 'pptk')->get();
-        $ttd_pa_kpa = TandaTangan::whereIn('jenis_ttd', ['pengguna_anggaran', 'kuasa_pengguna_anggaran'])->get();
+        $ttd_pemberi_perintah = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Pejabat Pemberi Perintah%');
+        })->get();
+
+        $ttd_pptk = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Petugas Pelaksana Teknis Kegiatan%');
+        })->get();
+
+        $ttd_pa_kpa = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Pengguna Anggaran%');
+        })->get();
 
         return view('dashboard.perdin.data-perdin.create', [
             'title' => 'Tambah Data Perdin',
@@ -354,9 +361,17 @@ class DataPerdinController extends Controller
 
         $selectedPegawai = $selectedPegawai->merge($pegawaiMengikuti);
 
-        $ttd_pemberi_perintah = TandaTangan::where('jenis_ttd', 'pemberi_perintah')->get();
-        $ttd_pptk = TandaTangan::where('jenis_ttd', 'pptk')->get();
-        $ttd_pa_kpa = TandaTangan::whereIn('jenis_ttd', ['pengguna_anggaran', 'kuasa_pengguna_anggaran'])->get();
+        $ttd_pemberi_perintah = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Pejabat Pemberi Perintah%');
+        })->get();
+
+        $ttd_pptk = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Petugas Pelaksana Teknis Kegiatan%');
+        })->get();
+
+        $ttd_pa_kpa = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Pengguna Anggaran%');
+        })->get();
 
         return view('dashboard.perdin.data-perdin.edit', [
             'title' => 'Perbarui Data Perdin',

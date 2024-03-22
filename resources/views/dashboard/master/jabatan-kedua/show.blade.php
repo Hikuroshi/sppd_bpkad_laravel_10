@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
 				<h4 class="card-title mb-1">{{ $title }}</h4>
-				<a class="btn btn-secondary btn-sm" href="{{ route('tanda-tangan.index') }}">
+				<a class="btn btn-secondary btn-sm" href="{{ route('jabatan-kedua.index') }}">
 					<i class="fa fa-reply"></i>
 				</a>
 			</div>
@@ -15,39 +15,21 @@
 				<div class="table-responsive">
 					<table class="table mg-b-0 text-md-nowrap border-bottom">
 						<tr>
-							<th style="white-space: nowrap; width: 1%;">Nama: </th>
-							<td>{{ $tanda_tangan->pegawai->nama }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Jabatan: </th>
-							<td>{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Jabatan Kedua: </th>
-							<td>{{ $tanda_tangan->jabatan_kedua->nama }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Status: </th>
-							<td>{{ $tanda_tangan->status ? 'Aktif' : 'Tidak Aktif' }}</td>
-						</tr>
-						<tr>
-							<th style="white-space: nowrap; width: 1%;">Tanda Tangan: </th>
-							<td>
-								<img class="img-fluid" style="max-width: 100px;" src="data:image/png;base64,{{ $tanda_tangan->fileTtdEncoded }}" alt="{{ $tanda_tangan->nama }}">
-							</td>
+							<th style="white-space: nowrap; width: 1%;">Nama:</th>
+							<td>{{ $jabatan_kedua->nama }}</td>
 						</tr>
 					</table>
 				</div>
 			</div>
 			<div class="card-footer">
-				<a class="btn btn-info me-2" href="{{ route('tanda-tangan.edit', $tanda_tangan->slug) }}">
+				<a class="btn btn-info me-2" href="{{ route('jabatan-kedua.edit', $jabatan_kedua->slug) }}">
 					<i class="fas fa-pencil-alt"></i>
 					Edit
 				</a>
-				<form action="{{ route('tanda-tangan.destroy', $tanda_tangan->slug) }}" method="post" class="d-inline">
+				<form action="{{ route('jabatan-kedua.destroy', $jabatan_kedua->slug) }}" method="post" class="d-inline">
 					@method('delete')
 					@csrf
-					<button type="button" class="btn btn-danger" id='deleteData' data-title="{{ $tanda_tangan->nama }}">
+					<button type="button" class="btn btn-danger" id='deleteData' data-title="{{ $jabatan_kedua->nama }}">
 						<i class="fas fa-trash"></i>
 						Delete
 					</button>

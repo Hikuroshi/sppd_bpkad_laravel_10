@@ -8,7 +8,7 @@
 			<div class="card-header">
 				<div class="d-flex align-items-center">
 					<h3 class="card-title">{{ $title }}</h3>
-					<a href="{{ route('tanda-tangan.create') }}" class="btn btn-primary mg-l-auto"><i class="fas fa-plus"></i></a>
+					<a href="{{ route('jabatan-kedua.create') }}" class="btn btn-primary mg-l-auto"><i class="fas fa-plus"></i></a>
 				</div>
 			</div>
 			<div class="card-body">
@@ -18,39 +18,29 @@
 							<tr class="text-center">
 								<th class="border-bottom-0" style="width: 1%">No</th>
 								<th class="border-bottom-0" style="width: 1%">Aksi</th>
-								<th class="border-bottom-0">Tanda Tangan</th>
 								<th class="border-bottom-0">Nama</th>
-								<th class="border-bottom-0">Jabatan</th>
-								<th class="border-bottom-0">Jabatan Kedua</th>
-								<th class="border-bottom-0">Status</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($tanda_tangans as $tanda_tangan)
+							@foreach ($jabatan_keduas as $jabatan_kedua)
 							<tr>
 								<td class="text-center">{{ $loop->iteration }}</td>
 								<td>
-									<a class="btn btn-primary btn-sm" href="{{ route('tanda-tangan.show', $tanda_tangan->slug) }}">
+									<a class="btn btn-primary btn-sm" href="{{ route('jabatan-kedua.show', $jabatan_kedua->slug) }}">
 										<i class="fas fa-eye"></i>
 									</a>
-									<a class="btn btn-info btn-sm" href="{{ route('tanda-tangan.edit', $tanda_tangan->slug) }}">
+									<a class="btn btn-info btn-sm" href="{{ route('jabatan-kedua.edit', $jabatan_kedua->slug) }}">
 										<i class="fas fa-pencil-alt"></i>
 									</a>
-									<form action="{{ route('tanda-tangan.destroy', $tanda_tangan->slug) }}" method="post" class="d-inline">
+									<form action="{{ route('jabatan-kedua.destroy', $jabatan_kedua->slug) }}" method="post" class="d-inline">
 										@method('delete')
 										@csrf
-										<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $tanda_tangan->pegawai->nama }}">
+										<button type="button" class="btn btn-danger btn-sm" id='deleteData' data-title="{{ $jabatan_kedua->nama }}">
 											<i class="fas fa-trash"></i>
 										</button>
 									</form>
 								</td>
-								<td>
-									<img class="img-fluid" style="max-width: 100px;" src="data:image/png;base64,{{ $tanda_tangan->fileTtdEncoded }}" alt="{{ $tanda_tangan->nama }}">
-								</td>
-								<td>{{ $tanda_tangan->pegawai->nama }}</td>
-								<td>{{ $tanda_tangan->pegawai->jabatan->nama }}</td>
-								<td>{{ $tanda_tangan->jabatan_kedua->nama }}</td>
-								<td>{{ $tanda_tangan->status ? 'Aktif' : 'Tidak Aktif' }}</td>
+								<td>{{ $jabatan_kedua->nama }}</td>
 							</tr>
 							@endforeach
 						</tbody>

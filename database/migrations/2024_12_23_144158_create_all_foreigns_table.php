@@ -43,14 +43,19 @@ return new class extends Migration
 
         Schema::table('tanda_tangans', function (Blueprint $table) {
             $table->foreign('pegawai_id')->references('id')->on('pegawais');
-            $table->foreign('author_id')->references('id')->on('users');
-        });
-
-        Schema::table('alat_angkuts', function (Blueprint $table) {
+            $table->foreign('jabatan_kedua_id')->references('id')->on('jabatan_keduas');
             $table->foreign('author_id')->references('id')->on('users');
         });
 
         Schema::table('jabatans', function (Blueprint $table) {
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+
+        Schema::table('jabatan_keduas', function (Blueprint $table) {
+            $table->foreign('author_id')->references('id')->on('users');
+        });
+
+        Schema::table('alat_angkuts', function (Blueprint $table) {
             $table->foreign('author_id')->references('id')->on('users');
         });
 

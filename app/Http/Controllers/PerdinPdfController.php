@@ -57,7 +57,9 @@ class PerdinPdfController extends Controller
     {
         App::setLocale('id');
         $data_perdin = DataPerdin::where('slug', $slug)->first();
-        $ttd_kepala = TandaTangan::where('jenis_ttd', 'kepala_badan')->first();
+        $ttd_kepala = TandaTangan::whereHas('jabatan_kedua', function ($query) {
+            $query->where('nama', 'like', '%Kepala Badan%');
+        })->first();
 
         $ttd_kepala = $ttd_kepala ?? 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 

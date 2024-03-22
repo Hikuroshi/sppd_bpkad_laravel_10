@@ -7,8 +7,11 @@ use App\Models\AlatAngkut;
 use App\Models\Bidang;
 use App\Models\Golongan;
 use App\Models\Jabatan;
+use App\Models\JabatanKedua;
 use App\Models\JenisPerdin;
+use App\Models\Kabupaten;
 use App\Models\Kegiatan;
+use App\Models\KegiatanSub;
 use App\Models\Ketentuan;
 use App\Models\Lama;
 use App\Models\LevelAdmin;
@@ -96,6 +99,31 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
 
+        KegiatanSub::create([
+            'nama' => 'Pembahasan Koordinasi Daerah Aliran Sungai Cidurian-Cisadane',
+            'slug' => 'pembahasan-koordinasi-daerah-aliran-sungai-cidurian-cisadane',
+            'kegiatan_id' => 1,
+            'author_id' => 1,
+        ]);
+        KegiatanSub::create([
+            'nama' => 'Konsultasi dengan Pihak Terkait di Daerah Aliran Sungai Cidurian-Cisadane',
+            'slug' => 'konsultasi-dengan-pihak-terkait-di-daerah-aliran-sungai-cidurian-cisadane',
+            'kegiatan_id' => 1,
+            'author_id' => 1,
+        ]);
+        KegiatanSub::create([
+            'nama' => 'Pembahasan Koordinasi Jalan Dan Jembatan Tangerang',
+            'slug' => 'pembahasan-koordinasi-jalan-dan-jembatan-tangerang',
+            'kegiatan_id' => 2,
+            'author_id' => 1,
+        ]);
+        KegiatanSub::create([
+            'nama' => 'Konsultasi dengan Pihak Terkait di Jalan Dan Jembatan Tangerang',
+            'slug' => 'konsultasi-dengan-pihak-terkait-di-jalan-dan-jembatan-tangerang',
+            'kegiatan_id' => 2,
+            'author_id' => 1,
+        ]);
+
         JenisPerdin::create([
             'nama' => 'Perjalanan Dinas Dalam Kota',
             'slug' => 'perjalanan-dinas-dalam-kota',
@@ -119,6 +147,19 @@ class DatabaseSeeder extends Seeder
             'nama' => 'BALI',
             'slug' => 'bali',
             'jenis_perdin_id' => 2,
+            'author_id' => 1,
+        ]);
+
+        Kabupaten::create([
+            'nama' => 'Serang',
+            'slug' => 'serang',
+            'wilayah_id' => 1,
+            'author_id' => 1,
+        ]);
+        Kabupaten::create([
+            'nama' => 'Tangerang',
+            'slug' => 'tangerang',
+            'wilayah_id' => 1,
             'author_id' => 1,
         ]);
 
@@ -255,7 +296,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Jabatan::create([
-            'nama' => 'KEPALA BIDANG',
+            'nama' => 'Kepala Bidang',
             'slug' => 'kepala-bidang',
             'author_id' => 1,
         ]);
@@ -265,8 +306,34 @@ class DatabaseSeeder extends Seeder
             'author_id' => 1,
         ]);
         Jabatan::create([
-            'nama' => 'KEPALA DINAS PUPR',
-            'slug' => 'kepala-dinas-pupr',
+            'nama' => 'Kepala Badan',
+            'slug' => 'kepala-badan',
+            'author_id' => 1,
+        ]);
+
+        JabatanKedua::create([
+            'nama' => 'Pejabat Pemberi Perintah',
+            'slug' => 'pejabat-pemberi-perintah',
+            'author_id' => 1,
+        ]);
+        JabatanKedua::create([
+            'nama' => 'Petugas Pelaksana Teknis Kegiatan',
+            'slug' => 'petugas-pelaksana-teknis-kegiatan',
+            'author_id' => 1,
+        ]);
+        JabatanKedua::create([
+            'nama' => 'Pengguna Anggaran',
+            'slug' => 'pengguna-anggaran',
+            'author_id' => 1,
+        ]);
+        JabatanKedua::create([
+            'nama' => 'Kuasa Pengguna Anggaran',
+            'slug' => 'kuasa-pengguna-anggaran',
+            'author_id' => 1,
+        ]);
+        JabatanKedua::create([
+            'nama' => 'Kepala Badan',
+            'slug' => 'kepala-badan',
             'author_id' => 1,
         ]);
 

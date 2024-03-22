@@ -25,21 +25,6 @@ class TandaTangan extends Model
         return 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
     }
 
-    public function getJenisTtdFAttribute()
-    {
-        if ($this->jenis_ttd) {
-            if ($this->jenis_ttd == 'pemberi_perintah') {
-                return 'Pejabat Pemberi Perintah';
-            } elseif ($this->jenis_ttd == 'pptk') {
-                return 'Petugas Pelaksana Teknis Kegiatan';
-            } elseif ($this->jenis_ttd == 'pengguna_anggaran') {
-                return 'Pengguna Anggaran';
-            } else {
-                return 'Kuasa Pengguna Anggaran';
-            }
-        }
-    }
-
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
@@ -48,6 +33,11 @@ class TandaTangan extends Model
     public function pegawai(): BelongsTo
     {
         return $this->belongsTo(Pegawai::class, 'pegawai_id');
+    }
+
+    public function jabatan_kedua(): BelongsTo
+    {
+        return $this->belongsTo(JabatanKedua::class, 'jabatan_kedua_id');
     }
 
     public function data_perdins(): HasMany

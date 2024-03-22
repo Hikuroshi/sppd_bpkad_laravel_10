@@ -41,19 +41,19 @@
 						@enderror
 					</div>
 					<div class="form-group">
-						<label for="jenis_ttd" class="form-label">Jenis Tanda Tangan</label>
-						<select name="jenis_ttd" id="jenis_ttd" class="form-control form-select @error('jenis_ttd') is-invalid @enderror">
-							<option value="">Pilih Jenis Tanda Tangan</option>
-							@foreach ($jenis_ttds as $key => $jenis_ttd)
-								<option value="{{ $key }}" @selected(old('jenis_ttd') == $key)>
-									{{ $jenis_ttd }}
-								</option>
+						<label for="jabatan_kedua_id" class="form-label">Jabatan Kedua</label>
+						<select name="jabatan_kedua_id" id="jabatan_kedua_id" class="form-control form-select select2 @error('jabatan_kedua_id') is-invalid @enderror">
+							<option value="">Pilih Jabatan Kedua</option>
+							@foreach ($jabatan_keduas as $jabatan_kedua)
+							<option value="{{ $jabatan_kedua->id }}" @selected(old('jabatan_kedua_id') == $jabatan_kedua->id)>
+								{{ $jabatan_kedua->nama }}
+							</option>
 							@endforeach
 						</select>
-						@error('jenis_ttd')
-							<div class="invalid-feedback">
-								{{ $message }}
-							</div>
+						@error('jabatan_kedua_id')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
 						@enderror
 					</div>
 

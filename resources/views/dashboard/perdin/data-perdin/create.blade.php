@@ -118,7 +118,7 @@
 									<option value="">Pilih KPA/PA</option>
 									@foreach ($ttd_pa_kpas as $ttd_pa_kpa)
 									<option value="{{ $ttd_pa_kpa->id }}" @selected(old('pa_kpa_id') == $ttd_pa_kpa->id)>
-										{{ $ttd_pa_kpa->pegawai->nama }} | {{ $ttd_pa_kpa->jenis_ttd_f }}
+										{{ $ttd_pa_kpa->pegawai->nama }} | {{ $ttd_pa_kpa->jabatan_kedua->nama }}
 									</option>
 									@endforeach
 								</select>

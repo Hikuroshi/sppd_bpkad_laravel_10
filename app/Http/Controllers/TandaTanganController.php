@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JabatanKedua;
 use App\Models\Pegawai;
 use App\Models\TandaTangan;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -26,18 +27,10 @@ class TandaTanganController extends Controller
      */
     public function create()
     {
-        $jenis_ttds = [
-            'pemberi_perintah' => 'Pejabat Pemberi Perintah',
-            'pptk' => 'Petugas Pelaksana Teknis Kegiatan',
-            'pengguna_anggaran' => 'Pengguna Anggaran',
-            'kuasa_pengguna_anggaran' => 'Kuasa Pengguna Anggaran',
-            'kepala_badan' => 'Kepala Badan'
-        ];
-
         return view('dashboard.master.tanda-tangan.create', [
             'title' => 'Tambah Tanda Tangan',
             'pegawais' => Pegawai::all(),
-            'jenis_ttds' => $jenis_ttds,
+            'jabatan_keduas' => JabatanKedua::all(),
         ]);
     }
 
@@ -48,8 +41,8 @@ class TandaTanganController extends Controller
     {
         $validatedData = $request->validate([
             'pegawai_id' => 'required',
+            'jabatan_kedua_id'=> 'required',
             'file_ttd' => 'image|max:10000',
-            'jenis_ttd'=> 'required',
         ]);
 
         $pegawai = Pegawai::where('id', $request->pegawai_id)->first();
@@ -80,19 +73,11 @@ class TandaTanganController extends Controller
      */
     public function edit(TandaTangan $tandaTangan)
     {
-        $jenis_ttds = [
-            'pemberi_perintah' => 'Pejabat Pemberi Perintah',
-            'pptk' => 'Petugas Pelaksana Teknis Kegiatan',
-            'pengguna_anggaran' => 'Pengguna Anggaran',
-            'kuasa_pengguna_anggaran' => 'Kuasa Pengguna Anggaran',
-            'kepala_badan' => 'Kepala Badan'
-        ];
-
         return view('dashboard.master.tanda-tangan.edit', [
             'title' => 'Perbarui Tanda Tangan',
             'tanda_tangan' => $tandaTangan,
             'pegawais' => Pegawai::all(),
-            'jenis_ttds' => $jenis_ttds,
+            'jabatan_keduas' => JabatanKedua::all(),
         ]);
     }
 
@@ -103,8 +88,8 @@ class TandaTanganController extends Controller
     {
         $validatedData = $request->validate([
             'pegawai_id' => 'required',
+            'jabatan_kedua_id'=> 'required',
             'file_ttd' => 'image|max:10000',
-            'jenis_ttd'=> 'required',
             'status' => 'required',
         ]);
 

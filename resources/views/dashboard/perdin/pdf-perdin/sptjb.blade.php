@@ -173,7 +173,7 @@
 						<div style="display: inline-block; text-align: center;">
 							<p style="margin-top: 20px;">
 								<span style="padding-right: 50px;">Serang,</span> {{ now()->isoFormat('MMMM YYYY') }} <br>
-                                {{ optional($kwitansi_perdin->data_perdin->pa_kpa)->jenis_ttd_f }}
+                                {{ $kwitansi_perdin->data_perdin->pa_kpa->jabatan_kedua->nama ?? '' }}
 							</p>
 							<img src="data:image/png;base64,{{ $kwitansi_perdin->data_perdin->tandaTanganFile($kwitansi_perdin->data_perdin->pa_kpa) }}" alt="{{ $kwitansi_perdin->data_perdin->pa_kpa->nama ?? '' }}" height="70">
 							<p>{{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nama ?? '' }}</p>

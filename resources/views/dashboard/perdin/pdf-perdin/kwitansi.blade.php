@@ -158,7 +158,7 @@
 			<tr>
 				<td style="text-align: center; border-right: 1px solid black;">
 					MENGETAHUI/MENYETUJUI <br>
-					{{ strtoupper($kwitansi_perdin->data_perdin->pa_kpa->jenis_ttd_f) }}
+					{{ strtoupper($kwitansi_perdin->data_perdin->pa_kpa->jabatan_kedua->nama) }}
 				</td>
 				<td style="text-align: center; border-right: 1px solid black;">
 					BENDAHARA <br>

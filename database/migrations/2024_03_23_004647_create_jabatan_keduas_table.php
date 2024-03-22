@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tanda_tangans', function (Blueprint $table) {
+        Schema::create('jabatan_keduas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('pegawai_id')->nullable();
-            $table->unsignedBigInteger('jabatan_kedua_id')->nullable();
-            $table->string('file_ttd')->nullable();
-            $table->boolean('status')->default('1');
             $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tanda_tangans');
+        Schema::dropIfExists('jabatan_keduas');
     }
 };
