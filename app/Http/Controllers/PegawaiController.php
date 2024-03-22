@@ -54,6 +54,7 @@ class PegawaiController extends Controller
                 'nip' => 'nullable|numeric|unique:pegawais',
                 'email' => 'nullable|email|unique:pegawais',
                 'no_hp' => 'nullable|numeric|unique:pegawais',
+                'no_rek' => 'nullable|numeric|min:5|unique:pegawais',
                 'jabatan_id' => 'required',
                 'seksi_id' => 'nullable',
                 'bidang_id' => 'nullable',
@@ -133,6 +134,9 @@ class PegawaiController extends Controller
         }
         if ($request->no_hp != $pegawai->no_hp) {
             $rules['no_hp'] = 'nullable|numeric|unique:pegawais';
+        }
+        if ($request->no_rek != $pegawai->no_rek) {
+            $rules['no_rek'] = 'nullable|numeric|min:5|unique:pegawais';
         }
         $validatedData = $request->validate($rules);
 

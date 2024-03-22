@@ -18,16 +18,16 @@ return new class extends Migration
             $table->string('nip')->unique()->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('no_hp')->unique()->nullable();
-            $table->unsignedBigInteger('jabatan_id');
+            $table->string('no_rek')->unique()->nullable();
+            $table->boolean('pptk');
+            $table->unsignedBigInteger('jabatan_id')->nullable();
             $table->unsignedBigInteger('seksi_id')->nullable();
             $table->unsignedBigInteger('bidang_id')->nullable();
             $table->unsignedBigInteger('golongan_id')->nullable();
             $table->unsignedBigInteger('pangkat_id')->nullable();
-            $table->boolean('pptk');
-            $table->unsignedBigInteger('ketentuan_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('ketentuan_id')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -36,8 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('pegawais', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('pegawais');
     }
 };

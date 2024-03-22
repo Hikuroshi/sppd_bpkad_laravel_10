@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('bendaharas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique()->nullable();
-            $table->unsignedBigInteger('pegawai_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('pegawai_id')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -26,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bendaharas', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('bendaharas');
     }
 };

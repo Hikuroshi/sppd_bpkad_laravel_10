@@ -72,6 +72,15 @@
 						@enderror
 					</div>
 					<div class="form-group">
+						<label for="no_rek">Nomor Rekening</label>
+						<input name="no_rek" value="{{ old('no_rek') }}" type="no_rek" class="form-control @error('no_rek') is-invalid @enderror" id="no_rek" placeholder="Masukan no_rek">
+						@error('no_rek')
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+						@enderror
+					</div>
+					<div class="form-group">
 						<label for="email">Email</label>
 						<input name="email" value="{{ old('email') }}" type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Masukan email">
 						@error('email')

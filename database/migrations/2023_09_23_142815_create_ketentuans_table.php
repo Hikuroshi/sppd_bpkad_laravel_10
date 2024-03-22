@@ -16,9 +16,8 @@ return new class extends Migration
             $table->integer('jumlah_perdin')->default(0);
             $table->integer('max_perdin')->default(108);
             $table->boolean('tersedia')->default(1);
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ketentuans', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('ketentuans');
     }
 };

@@ -24,10 +24,9 @@ return new class extends Migration
             $table->integer('golongan_ii');
             $table->integer('golongan_i');
             $table->integer('non_asn');
-            $table->unsignedBigInteger('wilayah_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('wilayah_id')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -36,8 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('uang_harians', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('uang_harians');
     }
 };

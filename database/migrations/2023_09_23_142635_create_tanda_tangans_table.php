@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('tanda_tangans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->unsignedBigInteger('pegawai_id');
+            $table->unsignedBigInteger('pegawai_id')->nullable();
             $table->boolean('status')->default('1');
             $table->enum('jenis_ttd', ['pemberi_perintah', 'pptk', 'pengguna_anggaran', 'kuasa_pengguna_anggaran', 'kepala_badan']);
             $table->string('file_ttd')->nullable();
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,8 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('tanda_tangans', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('tanda_tangans');
     }
 };

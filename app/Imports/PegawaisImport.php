@@ -68,6 +68,7 @@ class PegawaisImport implements ToModel, WithHeadingRow, WithValidation
             'nama'  => $row['nama'],
             'slug' => $slug,
             'nip' => $row['nip'] ?? null,
+            'no_rek' => $row['no_rek'] ?? null,
             'email' => $row['email'] ?? null,
             'no_hp' => $row['no_hp'] ?? null,
             'jabatan_id' => $jabatan->id,
@@ -92,6 +93,7 @@ class PegawaisImport implements ToModel, WithHeadingRow, WithValidation
             'nip' => 'nullable|unique:pegawais',
             'email' => 'nullable|email|unique:pegawais',
             'no_hp' => 'nullable|unique:pegawais',
+            'no_rek' => 'nullable|unique:pegawais',
         ];
     }
 
@@ -105,7 +107,8 @@ class PegawaisImport implements ToModel, WithHeadingRow, WithValidation
             'nip.unique' => 'NIP sudah digunakan.',
             'email.email' => 'Format email tidak valid.',
             'email.unique' => 'Email sudah digunakan.',
-            'no_hp.unique' => 'Nomor HP sudah digunakan.'
+            'no_hp.unique' => 'Nomor HP sudah digunakan.',
+            'no_rek.unique' => 'Nomor Rekening sudah digunakan.'
         ];
     }
 }

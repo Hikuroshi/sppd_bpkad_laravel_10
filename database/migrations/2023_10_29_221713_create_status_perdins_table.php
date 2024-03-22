@@ -18,7 +18,6 @@ return new class extends Migration
             $table->boolean('lap')->nullable();
             $table->boolean('kwitansi')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('status_perdins', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('status_perdins');
     }
 };

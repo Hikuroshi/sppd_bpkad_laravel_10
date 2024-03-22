@@ -22,7 +22,6 @@ return new class extends Migration
             $table->integer('uang_tiket')->default('0');
             $table->integer('uang_penginapan')->default('0');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,8 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('perdin_pegawai', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('kwitansi_pegawai');
     }
 };

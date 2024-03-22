@@ -3,20 +3,17 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
-use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pegawai extends Model
 {
-    use HasFactory, Sluggable, SoftDeletes, CascadeSoftDeletes;
+    use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
     protected $with = ['author', 'seksi', 'bidang', 'golongan', 'jabatan', 'pangkat', 'ketentuan'];
-    protected $cascadeDeletes = ['ketentuan'];
 
     public function author(): BelongsTo
     {

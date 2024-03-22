@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('slug')->unique();
             $table->string('no_rek');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('jenis_perdins', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('jenis_perdins');
     }
 };

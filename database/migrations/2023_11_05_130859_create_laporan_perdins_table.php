@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('file_laporan')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,8 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('laporan_perdins', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('laporan_perdins');
     }
 };

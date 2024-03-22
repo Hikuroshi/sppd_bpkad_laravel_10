@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('lamas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('lama_hari');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('lamas', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('lamas');
     }
 };

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('kegiatan_sub_id')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,8 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('kwitansi_perdins', function (Blueprint $table) {
-            $table->dropSoftDeletes();
-        });
+        Schema::dropIfExists('kwitansi_perdins');
     }
 };

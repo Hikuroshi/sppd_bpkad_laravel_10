@@ -23,6 +23,10 @@
 							<td>{{ $pegawai->nip }}</td>
 						</tr>
 						<tr>
+							<th style="white-space: nowrap; width: 1%;">Nomor Rekening:</th>
+							<td>{{ $pegawai->no_rek }}</td>
+						</tr>
+						<tr>
 							<th style="white-space: nowrap; width: 1%;">PPTK:</th>
 							<td>{{ $pegawai->pptk ? 'Ya' : 'Tidak' }}</td>
 						</tr>
