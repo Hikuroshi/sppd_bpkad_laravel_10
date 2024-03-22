@@ -21,9 +21,9 @@ jobs:
             cd domains/cvdelapantiga.info/public_html/sppd_bpkad
             if [ ! -d ".git" ]; then
               git init -b main
-              git remote add origin https://github.com/Hikuroshi/sppd_bpkad_laravel_10
+              git remote add origin https://github.com/Hikuroshi/sppd_bpkad_laravel_10.git
             fi
-            git config --unset credential.helper
+            git remote set-url origin https://github.com/Hikuroshi/sppd_bpkad_laravel_10.git
             rm -f .git/index.lock
             git fetch origin main
             git reset --hard origin/main
