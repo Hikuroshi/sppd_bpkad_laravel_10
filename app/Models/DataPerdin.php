@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 
 class DataPerdin extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
     protected $with = ['author', 'tanda_tangan', 'pptk', 'alat_angkut', 'jenis_perdin', 'tujuan', 'tujuan_lain', 'kabupaten', 'kabupaten_lain', 'pegawai_diperintah', 'status'];
