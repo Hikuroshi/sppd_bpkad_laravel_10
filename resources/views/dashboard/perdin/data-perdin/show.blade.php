@@ -83,7 +83,7 @@
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Lama</th>
-							<td>{{ $data_perdin->lama }}</td>
+							<td>{{ $data_perdin->lama->lama_hari }}</td>
 						</tr>
 						<tr>
 							<th style="white-space: nowrap; width: 1%;">Lokasi</th>

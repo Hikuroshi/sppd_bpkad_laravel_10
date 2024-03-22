@@ -58,15 +58,10 @@ class KwitansiPerdinController extends Controller
             return abort(404);
         }
 
-       $lama_perjalanan = Lama::where('id',$kwitansiPerdin->data_perdin->lama)
-                ->first()->lama_hari;
-
-        // return json_encode($lama_perjalanan);
         return view('dashboard.perdin.kwitansi-perdin.edit', [
             'title' => 'Perbarui Kwitansi Perdin',
             'kwitansi_perdin' => $kwitansiPerdin,
             'kegiatan_subs' => KegiatanSub::all(),
-            'lama_perjalanan' => $lama_perjalanan
         ]);
     }
 
@@ -75,7 +70,7 @@ class KwitansiPerdinController extends Controller
     */
     public function update(Request $request, KwitansiPerdin $kwitansiPerdin)
     {
-        
+
         if (!$kwitansiPerdin->data_perdin->status->lap) {
             return abort(404);
         }

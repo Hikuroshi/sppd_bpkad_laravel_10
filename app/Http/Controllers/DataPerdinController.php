@@ -90,7 +90,7 @@ class DataPerdinController extends Controller
                 'pegawai_mengikuti' => $data_perdin->pegawai_mengikuti->pluck('nama'),
                 'tujuan' => $data_perdin->tujuan->nama,
                 'tgl_berangkat' => $data_perdin->tgl_berangkat,
-                'lama' => $data_perdin->lama,
+                'lama' => $data_perdin->lama->lama_hari,
                 'tanda_tangan' => $data_perdin->tanda_tangan->pegawai->jabatan->nama,
             ];
         })
@@ -199,7 +199,7 @@ class DataPerdinController extends Controller
                 'pptk_id' => 'required',
                 'pa_kpa_id' => 'required',
                 'maksud' => 'required',
-                'lama' => 'required',
+                'lama_id' => 'required',
                 'tgl_berangkat' => 'required|date',
                 'tgl_kembali' => 'required|date',
                 'alat_angkut_id' => 'required',
@@ -387,7 +387,7 @@ class DataPerdinController extends Controller
                 'pptk_id' => 'required',
                 'pa_kpa_id' => 'required',
                 'maksud' => 'required',
-                'lama' => 'required',
+                'lama_id' => 'required',
                 'tgl_berangkat' => 'required|date',
                 'tgl_kembali' => 'required|date',
                 'alat_angkut_id' => 'required',

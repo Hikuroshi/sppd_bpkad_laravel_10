@@ -143,16 +143,16 @@
 					<div class="row row-sm">
 						<div class="col-sm-4">
 							<div class="form-group">
-								<label for="lama" class="form-label">Lamanya Perjalanan Dinas <span class="text-danger">*</span></label>
-								<select name="lama" id="lama" class="form-control form-select select2 @error('lama') is-invalid @enderror">
+								<label for="lama_id" class="form-label">Lamanya Perjalanan Dinas <span class="text-danger">*</span></label>
+								<select name="lama_id" id="lama_id" class="form-control form-select select2 @error('lama_id') is-invalid @enderror">
 									<option value="">Pilih Lama Hari</option>
 									@foreach ($lamas as $lama)
-									<option value="{{ $lama->lama_hari }}" @selected(old('lama') == $lama->lama_hari)>
+									<option value="{{ $lama->lama_id }}" @selected(old('lama_id') == $lama->id)>
 										{{ $lama->lama_hari }} hari
 									</option>
 									@endforeach
 								</select>
-								@error('lama')
+								@error('lama_id')
 								<div class="invalid-feedback">
 									{{ $message }}
 								</div>

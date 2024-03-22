@@ -106,7 +106,7 @@
 									<td>{{ $pegawai->nama }}</td>
 									<td>{{ $pegawai->nip }}</td>
 									<td>{{ $pegawai->pangkat->nama ?? '-'}}</td>
-									<td ><input type="text" class="form-control" id="lama_perjalanan" value=" {{$lama_perjalanan ?? '-'}}" readonly></td>
+									<td ><input type="text" class="form-control" id="lama_perjalanan" value=" {{$kwitansi_perdin->data_perdin->lama->lama_hari ?? '-'}}" readonly></td>
 									<td>
 										<input name="uang_harian[{{ $pegawai->id }}]" value="{{ number_format(old('uang_harian.' . $pegawai->id, $pegawai->pivot->uang_harian),0,",",".") }}" type="text" class="form-control @error('uang_harian.' . $pegawai->id) is-invalid @enderror" placeholder="Masukan Uang Harian" id="uangmasuk" required>
 										@error('uang_harian.' . $pegawai->id)
@@ -242,7 +242,7 @@
 @endif
 
 <script>
-	
+
 
 	function formatToRupiah(angka) {
 		return new Intl.NumberFormat('id-ID', {
@@ -255,11 +255,11 @@
 	    var lama_perjalanan = document.getElementById("lama_perjalanan").value;
 		// lama_perjalanan = lama_perjalanan.split(" ");
 		// lama_perjalanan = lama_perjalanan[0];
-		
+
 		// console.log(lama_perjalanan);
 
 	$(document).ready(function() {
-		
+
 		function hitungTotalPerBaris(row) {
 			//input harian
 			input_harian1 = row.find('input[name^="uang_harian"]').val();
@@ -283,7 +283,7 @@
 			input_penginapan1 = input_penginapan1.join("");
 			input_penginapan1 = (input_penginapan1*lama_perjalanan);
 
-			
+
 			let uangHarian = parseFloat(input_harian1) || 0;
 			let uangTransport = parseFloat(input_transport1) || 0;
 			let uangTiket = parseFloat(input_tiket1) || 0;
@@ -301,7 +301,7 @@
 			totalPenginapan = 0;
 
 			$('#pegawai_table tbody tr').each(function() {
-				
+
 				let rowTotal = hitungTotalPerBaris($(this));
 				//input harian
 				input_harian = $(this).find('input[name^="uang_harian"]').val();
@@ -378,13 +378,13 @@
         uangpenginapan.value = formatRupiah(this.value);
     });
 
-	
+
 	var uangtiket = document.getElementById('uangtiket');
     uangtiket.addEventListener('keyup', function(e)
     {
         uangtiket.value = formatRupiah(this.value);
     });
-    
+
     /* Fungsi */
     function formatRupiah(angka, prefix)
     {
@@ -393,12 +393,12 @@
             sisa     = split[0].length % 3,
             rupiah     = split[0].substr(0, sisa),
             ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
-            
+
         if (ribuan) {
             separator = sisa ? '.' : '';
             rupiah += separator + ribuan.join('.');
         }
-        
+
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
     }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pptk_id');
             $table->unsignedBigInteger('pa_kpa_id');
             $table->text('maksud');
-            $table->integer('lama');
+            $table->unsignedBigInteger('lama_id');
             $table->date('tgl_berangkat');
             $table->date('tgl_kembali');
             $table->unsignedBigInteger('alat_angkut_id');

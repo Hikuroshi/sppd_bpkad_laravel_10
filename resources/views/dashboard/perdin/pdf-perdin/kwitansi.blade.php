@@ -108,7 +108,7 @@
 			</tr>
 			<tr>
 				<td style="white-space: nowrap;">Rp.</td>
-				<td>: {{ number_format(($lama_perjalanan*$pegawai->pivot->uang_harian) + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + ($lama_perjalanan*$pegawai->pivot->uang_penginapan) + $kwitansi_perdin->bbm + $kwitansi_perdin->tol, 0, ',', '.') }}</td>
+				<td>: {{ number_format(($kwitansi_perdin->data_perdin->lama->lama_hari*$pegawai->pivot->uang_harian) + $pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + ($kwitansi_perdin->data_perdin->lama->lama_hari*$pegawai->pivot->uang_penginapan) + $kwitansi_perdin->bbm + $kwitansi_perdin->tol, 0, ',', '.') }}</td>
 			</tr>
 			<tr>
 				<td style="white-space: nowrap;">Yaitu untuk</td>
@@ -121,10 +121,10 @@
 				<td>
 					<table class="gap-t t-price" style="width: 100%; border-collapse: collapse;">
 						<tr>
-							<td>Uang Harian {{$lama_perjalanan}} hari * @ Rp {{ number_format($pegawai->pivot->uang_harian, 0, ',', '.') }}</td>
-							<td>= Rp</td>	
+							<td>Uang Harian {{$kwitansi_perdin->data_perdin->lama->lama_hari}} hari * @ Rp {{ number_format($pegawai->pivot->uang_harian, 0, ',', '.') }}</td>
+							<td>= Rp</td>
 							@php
-								$jml_harian = $lama_perjalanan*$pegawai->pivot->uang_harian;
+								$jml_harian = $kwitansi_perdin->data_perdin->lama->lama_hari*$pegawai->pivot->uang_harian;
 							@endphp
 							<td>{{ number_format($jml_harian, 0, ',', '.') }}</td>
 							<td>Nomor Rekening:</td>
@@ -137,9 +137,9 @@
 							<td colspan="4">{{ number_format($pegawai->pivot->uang_transport + $pegawai->pivot->uang_tiket + $kwitansi_perdin->bbm + $kwitansi_perdin->tol, 0, ',', '.') }}</td>
 						</tr>
 						<tr>
-							<td>Uang Penginapan {{$lama_perjalanan}} hari * @ Rp {{number_format($pegawai->pivot->uang_penginapan, 0, ',', '.')}}</td>
+							<td>Uang Penginapan {{$kwitansi_perdin->data_perdin->lama->lama_hari}} hari * @ Rp {{number_format($pegawai->pivot->uang_penginapan, 0, ',', '.')}}</td>
 							@php
-								$jml_penginapan = $lama_perjalanan*$pegawai->pivot->uang_penginapan;
+								$jml_penginapan = $kwitansi_perdin->data_perdin->lama->lama_hari*$pegawai->pivot->uang_penginapan;
 							@endphp
 							<td>= Rp</td>
 							<td colspan="4">{{ number_format($jml_penginapan, 0, ',', '.') }}</td>

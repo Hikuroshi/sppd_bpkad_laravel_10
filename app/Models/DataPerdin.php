@@ -169,6 +169,11 @@ class DataPerdin extends Model
         return $this->belongsTo(KwitansiPerdin::class, 'kwitansi_perdin_id');
     }
 
+    public function lama(): BelongsTo
+    {
+        return $this->belongsTo(Lama::class, 'lama_id');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

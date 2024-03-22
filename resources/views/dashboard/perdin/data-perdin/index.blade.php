@@ -58,7 +58,7 @@
 								<td>{{ $data_perdin->perihal }}</td>
 								<td>{{ $data_perdin->pegawai_diperintah->nama }}</td>
 								<td>{{ $data_perdin->tgl_berangkat }}</td>
-								<td>{{ $data_perdin->lama }}</td>
+								<td>{{ $data_perdin->lama->lama_hari }}</td>
 								<td>{{ $data_perdin->lokasi }}</td>
 								<td>{{ $data_perdin->jumlah_pegawai }}</td>
 								<td>{{ $data_perdin->jenis_perdin->nama }}</td>

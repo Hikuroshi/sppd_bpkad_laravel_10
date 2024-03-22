@@ -142,7 +142,7 @@
 					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
 					<td style="border-left: 0; border-bottom: 0;">Lamanya Perjalanan Dinas</td>
 					<td style="width: 1%; border-right: 0; border-bottom: 0;">a. </td>
-					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->kwitansi_perdin->terbilang($data_perdin->lama) }} hari</td>
+					<td colspan="2" style="border-left: 0; border-bottom: 0;">{{ $data_perdin->kwitansi_perdin->terbilang($data_perdin->lama->lama_hari) }} hari</td>
 				</tr>
 				<tr>
 					<td style="width: 1%; border-right: 0; border-bottom: 0; border-top: 0;">b. </td>

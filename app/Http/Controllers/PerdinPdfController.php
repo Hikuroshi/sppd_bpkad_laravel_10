@@ -126,10 +126,6 @@ class PerdinPdfController extends Controller
         App::setLocale('id');
         $kwitansi_perdin = KwitansiPerdin::where('id', $id)->first();
         $bendahara = Bendahara::latest()->first();
-        $lama_perjalanan = Lama::where('id',$kwitansi_perdin->data_perdin->lama)
-                ->first()->lama_hari;
-        
-        // return json_encode($lama_perjalanan);
 
         $imgLogo = base64_encode(file_get_contents(public_path('assets/img/logo-banten2.png')));
 
@@ -137,7 +133,6 @@ class PerdinPdfController extends Controller
             'kwitansi_perdin' => $kwitansi_perdin,
             'imgLogo' => $imgLogo,
             'bendahara' => $bendahara,
-            'lama_perjalanan' => $lama_perjalanan,
         ]);
 
         $pdf->setPaper(array(0,0,609.4488,935.433), 'portrait');
