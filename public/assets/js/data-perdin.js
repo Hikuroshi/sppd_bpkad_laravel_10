@@ -4,7 +4,7 @@ function hitungTanggalKembali() {
     let lamaOption = $('#lama_id option:selected');
     let lama = parseInt(lamaOption.data('lama'));
 
-    if (tanggalBerangkat !== '' && !isNaN(lama)) {
+    if (tanggalBerangkat && !isNaN(lama)) {
         let tanggalKembali = new Date(tanggalBerangkat);
         tanggalKembali.setDate(tanggalKembali.getDate() + lama - 1);
 
@@ -15,8 +15,7 @@ function hitungTanggalKembali() {
     }
 }
 
-$('#lama_id').on('change', hitungTanggalKembali);
-$('#tgl_berangkat').on('change', hitungTanggalKembali);
+$('#tgl_berangkat, #lama_id').on('change', hitungTanggalKembali);
 
 // Tujuan yang menyesuaikan jenis perdin
 $('#jenis_perdin_id').on('change', function() {
