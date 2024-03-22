@@ -15,7 +15,7 @@ function hitungTanggalKembali() {
     }
 }
 
-$('#lama').on('change', hitungTanggalKembali);
+$('#lama_id').on('change', hitungTanggalKembali);
 $('#tgl_berangkat').on('change', hitungTanggalKembali);
 
 // Tujuan yang menyesuaikan jenis perdin
