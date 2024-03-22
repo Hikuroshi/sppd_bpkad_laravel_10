@@ -147,7 +147,7 @@
 								<select name="lama_id" id="lama_id" class="form-control form-select select2 @error('lama_id') is-invalid @enderror">
 									<option value="">Pilih Lama Hari</option>
 									@foreach ($lamas as $lama)
-									<option value="{{ $lama->lama_id }}" @selected(old('lama_id') == $lama->id)>
+									<option value="{{ $lama->id }}" @selected(old('lama_id') == $lama->id)>
 										{{ $lama->lama_hari }} hari
 									</option>
 									@endforeach
@@ -276,7 +276,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="kabupaten_lain_id" class="form-label">Kabupaten Lain <span class="text-danger">*</span></label>
+								<label for="kabupaten_lain_id" class="form-label">Kabupaten Lain </label>
 								<select name="kabupaten_lain_id" id="kabupaten_lain_id" class="form-control form-select select2 @error('kabupaten_lain_id') is-invalid @enderror">
 									<option value="">Pilih Kabupaten Lain</option>
 								</select>
