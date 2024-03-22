@@ -4,7 +4,7 @@ function hitungTanggalKembali() {
     let lamaOption = $('#lama_id option:selected');
     let lama = parseInt(lamaOption.data('lama'));
 
-    if (tanggalBerangkat && !isNaN(lama)) {
+    if (tanggalBerangkat && lama) {
         let tanggalKembali = new Date(tanggalBerangkat);
         tanggalKembali.setDate(tanggalKembali.getDate() + lama - 1);
 
