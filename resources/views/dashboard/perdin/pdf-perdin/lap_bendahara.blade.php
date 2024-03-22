@@ -99,16 +99,14 @@
 				<td>
 					<div style="text-align: center;">
 						<div style="display: inline-block; text-align: left;">
-                            @if ($kwitansi_perdin->data_perdin->pa_kpa)
 							<p style="margin-top: 20px;">
 								<span style="padding-right: 50px;">Serang,</span> {{ now()->isoFormat('MMMM YYYY') }} <br>
-                                <p>{{ $kwitansi_perdin->data_perdin->pa_kpa->jenis_ttd_f }}</p>
+                                <p>{{ optional($kwitansi_perdin->data_perdin->pa_kpa)->jenis_ttd_f }}</p>
 							</p>
-							<img src="data:image/png;base64,{{ $kwitansi_perdin->data_perdin->pa_kpa->fileTtdEncoded }}" alt="{{ $kwitansi_perdin->data_perdin->pa_kpa->nama }}" height="70">
-							<p>{{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nama }}</p>
+							<img src="data:image/png;base64,{{ $kwitansi_perdin->data_perdin->tandaTanganFile($kwitansi_perdin->data_perdin->pa_kpa) }}" alt="{{ $kwitansi_perdin->data_perdin->pa_kpa->nama ?? '' }}" height="70">
+							<p>{{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nama ?? '' }}</p>
                             <p>{{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->pangkat->nama ?? '' }}</p>
-							<p>NIP {{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nip }}</p>
-                            @endif
+							<p>NIP {{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nip ?? '' }}</p>
 						</div>
 					</div>
 				</td>

@@ -19,6 +19,15 @@ class DataPerdin extends Model
     protected $with = ['author', 'tanda_tangan', 'pptk', 'alat_angkut', 'jenis_perdin', 'tujuan', 'tujuan_lain', 'kabupaten', 'kabupaten_lain', 'pegawai_diperintah', 'status'];
     protected $cascadeDeletes = ['status', 'laporan_perdin', 'kwitansi_perdin'];
 
+    public function tandaTanganFile($jenis)
+    {
+        if ($jenis == null) {
+            return 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+        }
+
+        return $jenis->fileTtdEncoded;
+    }
+
     public function getTtdFormatedAttribute()
     {
         $words = explode(' ', $this->tanda_tangan->pegawai->jabatan->nama);

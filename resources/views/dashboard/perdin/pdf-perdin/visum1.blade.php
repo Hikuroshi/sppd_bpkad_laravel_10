@@ -74,7 +74,7 @@
 					<td style="text-align: center; width: 1%">1</td>
 					<td colspan="2">Pengguna Anggaran/Kuasa Pengguna Anggaran</td>
 					<td style="border-right: 0;"></td>
-					<td colspan="2" style="border-left: 0; text-transform: capitalize;">{{ ($data_perdin->pa_kpa->jenis_ttd == 'pengguna_anggaran') ? 'Pengguna Anggaran' : 'Kuasa Pengguna Anggaran' }}</td>
+					<td colspan="2" style="border-left: 0; text-transform: capitalize;">{{ optional($data_perdin->pa_kpa)->jenis_ttd_f }}</td>
 				</tr>
 				<tr>
 					<td style="text-align: center; width: 1%">2</td>
@@ -214,13 +214,11 @@
                     </table>
 
                     <div style="padding: 3px;">
-						@if ($data_perdin->pa_kpa)
-                        <p>{{ ($data_perdin->pa_kpa->jenis_ttd == 'pengguna_anggaran') ? 'Pengguna Anggaran' : 'Kuasa Pengguna Anggaran' }}</p>
-                        <img src="data:image/png;base64,{{ $data_perdin->pa_kpa->fileTtdEncoded }}" alt="{{ $data_perdin->pa_kpa->nama }}" height="70">
-                        <p>{{ $data_perdin->pa_kpa->pegawai->nama }}</p>
+                        <p>{{ optional($data_perdin->pa_kpa)->jenis_ttd_f }}</p>
+                        <img src="data:image/png;base64,{{ $data_perdin->tandaTanganFile($data_perdin->pa_kpa) }}" alt="{{ $data_perdin->pa_kpa->nama ?? '' }}" height="70">
+                        <p>{{ $data_perdin->pa_kpa->pegawai->nama ?? '' }}</p>
                         <p>{{ $data_perdin->pa_kpa->pegawai->pangkat->nama ?? '' }}</p>
                         <p>NIP {{ $data_perdin->pa_kpa->pegawai->nip ?? '' }}</p>
-						@endif
                     </div>
                 </td>
 			</tr>

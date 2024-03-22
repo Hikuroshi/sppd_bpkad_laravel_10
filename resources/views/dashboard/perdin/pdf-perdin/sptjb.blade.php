@@ -102,7 +102,7 @@
         </table>
 
         <p style="margin-bottom: 20px;">
-            Yang bertandatangan dibawah ini <span style="text-transform: capitalize"></span>{{ strtolower($kwitansi_perdin->data_perdin->tanda_tangan->pegawai->jabatan->nama) }} Badan Pengelolaan Keuangan dan Aset Daerah Provinsi Banten, menyatakan bahwa saya bertanggungjawab penuh atas segala pengeluaran yang dibayarkan kepada yang berhak menerima dengan perincian sebagai berikut:
+            Yang bertandatangan dibawah ini <span style="text-transform: capitalize">{{ strtolower($kwitansi_perdin->data_perdin->tanda_tangan->pegawai->jabatan->nama ?? '') }}</span> Badan Pengelolaan Keuangan dan Aset Daerah Provinsi Banten, menyatakan bahwa saya bertanggungjawab penuh atas segala pengeluaran yang dibayarkan kepada yang berhak menerima dengan perincian sebagai berikut:
         </p>
 
         <table class="table-border">
@@ -171,15 +171,13 @@
 				<td>
 					<div style="text-align: right;">
 						<div style="display: inline-block; text-align: center;">
-                            @if ($kwitansi_perdin->data_perdin->pa_kpa)
 							<p style="margin-top: 20px;">
 								<span style="padding-right: 50px;">Serang,</span> {{ now()->isoFormat('MMMM YYYY') }} <br>
-                                {{ $kwitansi_perdin->data_perdin->pa_kpa->jenis_ttd_f }}
+                                {{ optional($kwitansi_perdin->data_perdin->pa_kpa)->jenis_ttd_f }}
 							</p>
-							<img src="data:image/png;base64,{{ $kwitansi_perdin->data_perdin->pa_kpa->fileTtdEncoded }}" alt="{{ $kwitansi_perdin->data_perdin->pa_kpa->nama }}" height="70">
-							<p>{{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nama }}</p>
-							<p>NIP {{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nip }}</p>
-                            @endif
+							<img src="data:image/png;base64,{{ $kwitansi_perdin->data_perdin->tandaTanganFile($kwitansi_perdin->data_perdin->pa_kpa) }}" alt="{{ $kwitansi_perdin->data_perdin->pa_kpa->nama ?? '' }}" height="70">
+							<p>{{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nama ?? '' }}</p>
+							<p>NIP {{ $kwitansi_perdin->data_perdin->pa_kpa->pegawai->nip ?? '' }}</p>
 						</div>
 					</div>
 				</td>

@@ -155,12 +155,12 @@
 						<div style="display: inline-block; text-align: left;">
 							<p>
 								Serang,  {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }} <br>
-								<b style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</b>
+								<b style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama ?? '') }}</b>
 							</p>
-							<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="70">
-							<p style="text-decoration: underline; font-weight: bold">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+							<img src="data:image/png;base64,{{ $data_perdin->tandaTanganFile($data_perdin->tanda_tangan) }}" alt="{{ $data_perdin->tanda_tangan->nama ?? '' }}" height="70">
+							<p style="text-decoration: underline; font-weight: bold">{{ $data_perdin->tanda_tangan->pegawai->nama ?? '' }}</p>
                             <p>{{ $data_perdin->tanda_tangan->pegawai->pangkat->nama ?? '' }}</p>
-							<p>NIP {{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
+							<p>NIP {{ $data_perdin->tanda_tangan->pegawai->nip ?? '' }}</p>
 						</div>
 					</div>
 				</td>
@@ -321,12 +321,12 @@
 						<div style="display: inline-block; text-align: left;">
 							<p>
 								Serang,  {{ Carbon\Carbon::parse($data_perdin->tgl_berangkat)->isoFormat('D MMMM YYYY') }} <br>
-								<b style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</b>
+								<b style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama ?? '') }}</b>
 							</p>
-							<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="70">
-							<p style="text-decoration: underline; font-weight: bold">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+							<img src="data:image/png;base64,{{ $data_perdin->tandaTanganFile($data_perdin->tanda_tangan) }}" alt="{{ $data_perdin->tanda_tangan->nama ?? '' }}" height="70">
+							<p style="text-decoration: underline; font-weight: bold">{{ $data_perdin->tanda_tangan->pegawai->nama ?? '' }}</p>
                             <p>{{ $data_perdin->tanda_tangan->pegawai->pangkat->nama ?? '' }}</p>
-							<p>NIP {{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
+							<p>NIP {{ $data_perdin->tanda_tangan->pegawai->nip ?? '' }}</p>
 						</div>
 					</div>
 				</td>

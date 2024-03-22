@@ -76,8 +76,8 @@ class DataPerdinController extends Controller
         ->get()
         ->filter(function ($data_perdin) use ($jabatan_id) {
             return $jabatan_id ?
-                ($data_perdin->tanda_tangan->pegawai->jabatan->id == $jabatan_id ||
-                $data_perdin->pa_kpa->pegawai->jabatan->id == $jabatan_id) : true;
+                ($data_perdin->tanda_tangan?->pegawai?->jabatan?->id == $jabatan_id ||
+                $data_perdin->pa_kpa?->pegawai?->jabatan?->id == $jabatan_id) : true;
         })
         ->map(function ($data_perdin) {
             $status = ($data_perdin->status->approve === null) ? 'Baru' : (($data_perdin->status->approve === 0) ? 'Ditolak' : 'Diterima');

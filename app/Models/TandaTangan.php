@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class TandaTangan extends Model
 {
@@ -18,8 +19,8 @@ class TandaTangan extends Model
 
     public function getFileTtdEncodedAttribute()
     {
-        if ($this->file_ttd) {
-            $fileContents = file_get_contents(storage_path('app/' . $this->file_ttd));
+        if ($this->file_ttd && Storage::exists($this->file_ttd)) {
+            $fileContents = Storage::get($this->file_ttd);
             return base64_encode($fileContents);
         }
         return 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';

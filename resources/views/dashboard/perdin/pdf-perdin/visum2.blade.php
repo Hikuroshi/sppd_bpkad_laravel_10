@@ -49,9 +49,9 @@
 					<tr>
 						<td></td>
 						<td colspan="2">
-							<img src="data:image/png;base64,{{ $data_perdin->pptk->fileTtdEncoded ?? 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=' }}" alt="{{ $data_perdin->pptk->pegawai->nama ?? '' }}" height="60">
-							<p>{{ $data_perdin->pptk->pegawai->nama ?? '-' }}</p>
-							<p>NIP {{ $data_perdin->pptk->pegawai->nip ?? '-' }}</p>
+							<img src="data:image/png;base64,{{ $data_perdin->tandaTanganFile($data_perdin->pptk) }}" alt="{{ $data_perdin->pptk->pegawai->nama ?? '' }}" height="60">
+							<p>{{ $data_perdin->pptk->pegawai->nama ?? '' }}</p>
+							<p>NIP {{ $data_perdin->pptk->pegawai->nip ?? '' }}</p>
 						</td>
 					</tr>
 				</table>
@@ -318,12 +318,12 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<b style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama) }}</b>
+							<b style="text-transform: capitalize">{{ strtolower($data_perdin->tanda_tangan->pegawai->jabatan->nama ?? '') }}</b>
 
-							<img src="data:image/png;base64,{{ $data_perdin->tanda_tangan->fileTtdEncoded }}" alt="{{ $data_perdin->tanda_tangan->nama }}" height="70">
-							<p style="font-weight: bold">{{ $data_perdin->tanda_tangan->pegawai->nama }}</p>
+							<img src="data:image/png;base64,{{ $data_perdin->tandaTanganFile($data_perdin->tanda_tangan) }}" alt="{{ $data_perdin->tanda_tangan->nama ?? '' }}" height="70">
+							<p style="font-weight: bold">{{ $data_perdin->tanda_tangan->pegawai->nama ?? '' }}</p>
                             <p>{{ $data_perdin->tanda_tangan->pegawai->pangkat->nama ?? '' }}</p>
-							<p>NIP {{ $data_perdin->tanda_tangan->pegawai->nip }}</p>
+							<p>NIP {{ $data_perdin->tanda_tangan->pegawai->nip ?? '' }}</p>
 						</td>
 					</tr>
 				</table>
