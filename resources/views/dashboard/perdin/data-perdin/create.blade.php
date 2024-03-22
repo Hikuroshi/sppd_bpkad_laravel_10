@@ -147,7 +147,7 @@
 								<select name="lama_id" id="lama_id" class="form-control form-select select2 @error('lama_id') is-invalid @enderror">
 									<option value="">Pilih Lama Hari</option>
 									@foreach ($lamas as $lama)
-									<option value="{{ $lama->id }}" @selected(old('lama_id') == $lama->id)>
+									<option data-lama="{{ $lama->lama_hari }}" value="{{ $lama->id }}" @selected(old('lama_id') == $lama->id)>
 										{{ $lama->lama_hari }} hari
 									</option>
 									@endforeach
