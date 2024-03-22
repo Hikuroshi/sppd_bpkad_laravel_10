@@ -403,6 +403,26 @@
 
 <script>
     var selected_pegawai = @json($selected_pegawai);
+
+    $(document).ready(function() {
+        // Tanggal kembali otomatis
+        function hitungTanggalKembali() {
+            let tanggalBerangkat = $('#tgl_berangkat').val();
+            let lama = $('#lama_id option:selected').data('lama');
+
+            if (tanggalBerangkat && lama) {
+                let tanggalKembali = new Date(tanggalBerangkat);
+                tanggalKembali.setDate(tanggalKembali.getDate() + lama - 1);
+
+                let formattedTanggalKembali = tanggalKembali.toISOString().slice(0, 10);
+                $('#tgl_kembali').val(formattedTanggalKembali);
+            } else {
+                $('#tgl_kembali').val('');
+            }
+        }
+
+        $('#tgl_berangkat, #lama_id').on('change', hitungTanggalKembali);
+    });
 </script>
 
 <!-- Data Perdin -->
