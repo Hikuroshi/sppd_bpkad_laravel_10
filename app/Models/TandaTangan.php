@@ -27,17 +27,17 @@ class TandaTangan extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function pegawai(): BelongsTo
     {
-        return $this->belongsTo(Pegawai::class, 'pegawai_id');
+        return $this->belongsTo(Pegawai::class, 'pegawai_id')->withDefault();
     }
 
     public function jabatan_kedua(): BelongsTo
     {
-        return $this->belongsTo(JabatanKedua::class, 'jabatan_kedua_id');
+        return $this->belongsTo(JabatanKedua::class, 'jabatan_kedua_id')->withDefault();
     }
 
     public function data_perdins(): HasMany

@@ -17,12 +17,12 @@ class Seksi extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function bidang(): BelongsTo
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->belongsTo(Bidang::class, 'bidang_id')->withDefault();
     }
 
     public function kegiatans(): HasMany

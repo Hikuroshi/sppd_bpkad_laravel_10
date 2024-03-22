@@ -17,12 +17,12 @@ class KegiatanSub extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function kegiatan(): BelongsTo
     {
-        return $this->belongsTo(Kegiatan::class, 'kegiatan_id');
+        return $this->belongsTo(Kegiatan::class, 'kegiatan_id')->withDefault();
     }
 
     public function kwitansi_perdins(): HasMany

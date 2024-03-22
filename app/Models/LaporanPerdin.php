@@ -16,7 +16,7 @@ class LaporanPerdin extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function data_perdin(): HasOne

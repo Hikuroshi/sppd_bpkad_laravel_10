@@ -16,17 +16,17 @@ class Kabupaten extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function wilayah(): BelongsTo
     {
-        return $this->belongsTo(Wilayah::class, 'wilayah_id');
+        return $this->belongsTo(Wilayah::class, 'wilayah_id')->withDefault();
     }
 
     public function data_perdins(): BelongsTo
     {
-        return $this->belongsTo(DataPerdin::class, 'kabupaten_id');
+        return $this->belongsTo(DataPerdin::class, 'kabupaten_id')->withDefault();
     }
 
     public function getRouteKeyName()

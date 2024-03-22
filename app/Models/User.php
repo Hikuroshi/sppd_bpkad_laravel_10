@@ -29,12 +29,12 @@ class User extends Authenticatable
 
     public function bidang(): BelongsTo
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->belongsTo(Bidang::class, 'bidang_id')->withDefault();
     }
 
     public function jabatan(): BelongsTo
     {
-        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+        return $this->belongsTo(Jabatan::class, 'jabatan_id')->withDefault();
     }
 
     public function data_perdins(): HasMany

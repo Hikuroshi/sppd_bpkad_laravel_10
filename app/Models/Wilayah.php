@@ -17,12 +17,12 @@ class Wilayah extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function jenis_perdin(): BelongsTo
     {
-        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
+        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id')->withDefault();
     }
 
     public function kabupatens(): HasMany

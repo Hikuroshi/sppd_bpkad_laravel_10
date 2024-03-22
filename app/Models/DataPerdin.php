@@ -96,57 +96,57 @@ class DataPerdin extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function tanda_tangan(): BelongsTo
     {
-        return $this->belongsTo(TandaTangan::class, 'tanda_tangan_id');
+        return $this->belongsTo(TandaTangan::class, 'tanda_tangan_id')->withDefault();
     }
 
     public function pptk(): BelongsTo
     {
-        return $this->belongsTo(TandaTangan::class, 'pptk_id');
+        return $this->belongsTo(TandaTangan::class, 'pptk_id')->withDefault();
     }
 
     public function pa_kpa(): BelongsTo
     {
-        return $this->belongsTo(TandaTangan::class, 'pa_kpa_id');
+        return $this->belongsTo(TandaTangan::class, 'pa_kpa_id')->withDefault();
     }
 
     public function alat_angkut(): BelongsTo
     {
-        return $this->belongsTo(AlatAngkut::class, 'alat_angkut_id');
+        return $this->belongsTo(AlatAngkut::class, 'alat_angkut_id')->withDefault();
     }
 
     public function jenis_perdin(): BelongsTo
     {
-        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id');
+        return $this->belongsTo(JenisPerdin::class, 'jenis_perdin_id')->withDefault();
     }
 
     public function tujuan(): BelongsTo
     {
-        return $this->belongsTo(Wilayah::class, 'tujuan_id');
+        return $this->belongsTo(Wilayah::class, 'tujuan_id')->withDefault();
     }
 
     public function tujuan_lain(): BelongsTo
     {
-        return $this->belongsTo(Wilayah::class, 'tujuan_lain_id');
+        return $this->belongsTo(Wilayah::class, 'tujuan_lain_id')->withDefault();
     }
 
     public function kabupaten(): BelongsTo
     {
-        return $this->belongsTo(Kabupaten::class, 'kabupaten_id');
+        return $this->belongsTo(Kabupaten::class, 'kabupaten_id')->withDefault();
     }
 
     public function kabupaten_lain(): BelongsTo
     {
-        return $this->belongsTo(Kabupaten::class, 'kabupaten_lain_id');
+        return $this->belongsTo(Kabupaten::class, 'kabupaten_lain_id')->withDefault();
     }
 
     public function pegawai_diperintah(): BelongsTo
     {
-        return $this->belongsTo(Pegawai::class, 'pegawai_diperintah_id');
+        return $this->belongsTo(Pegawai::class, 'pegawai_diperintah_id')->withDefault();
     }
 
     public function pegawai_mengikuti(): BelongsToMany
@@ -156,22 +156,22 @@ class DataPerdin extends Model
 
     public function status(): BelongsTo
     {
-        return $this->belongsTo(StatusPerdin::class, 'status_id');
+        return $this->belongsTo(StatusPerdin::class, 'status_id')->withDefault();
     }
 
     public function laporan_perdin(): BelongsTo
     {
-        return $this->belongsTo(LaporanPerdin::class, 'laporan_perdin_id');
+        return $this->belongsTo(LaporanPerdin::class, 'laporan_perdin_id')->withDefault();
     }
 
     public function kwitansi_perdin(): BelongsTo
     {
-        return $this->belongsTo(KwitansiPerdin::class, 'kwitansi_perdin_id');
+        return $this->belongsTo(KwitansiPerdin::class, 'kwitansi_perdin_id')->withDefault();
     }
 
     public function lama(): BelongsTo
     {
-        return $this->belongsTo(Lama::class, 'lama_id');
+        return $this->belongsTo(Lama::class, 'lama_id')->withDefault();
     }
 
     public function getRouteKeyName()

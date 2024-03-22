@@ -64,17 +64,17 @@ class KwitansiPerdin extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function kegiatan_sub(): BelongsTo
     {
-        return $this->belongsTo(KegiatanSub::class, 'kegiatan_sub_id');
+        return $this->belongsTo(KegiatanSub::class, 'kegiatan_sub_id')->withDefault();
     }
 
     public function pptk(): BelongsTo
     {
-        return $this->belongsTo(Pegawai::class, 'pptk_id');
+        return $this->belongsTo(Pegawai::class, 'pptk_id')->withDefault();
     }
 
     public function pegawais()

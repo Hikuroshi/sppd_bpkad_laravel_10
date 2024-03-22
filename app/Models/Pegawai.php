@@ -17,47 +17,47 @@ class Pegawai extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id')->withDefault();
     }
 
     public function seksi(): BelongsTo
     {
-        return $this->belongsTo(Seksi::class, 'seksi_id');
+        return $this->belongsTo(Seksi::class, 'seksi_id')->withDefault();
     }
 
     public function bidang(): BelongsTo
     {
-        return $this->belongsTo(Bidang::class, 'bidang_id');
+        return $this->belongsTo(Bidang::class, 'bidang_id')->withDefault();
     }
 
     public function golongan(): BelongsTo
     {
-        return $this->belongsTo(Golongan::class, 'golongan_id');
+        return $this->belongsTo(Golongan::class, 'golongan_id')->withDefault();
     }
 
     public function pangkat(): BelongsTo
     {
-        return $this->belongsTo(Pangkat::class, 'pangkat_id');
+        return $this->belongsTo(Pangkat::class, 'pangkat_id')->withDefault();
     }
 
     public function jabatan(): BelongsTo
     {
-        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+        return $this->belongsTo(Jabatan::class, 'jabatan_id')->withDefault();
     }
 
     public function ketentuan(): BelongsTo
     {
-        return $this->belongsTo(Ketentuan::class, 'ketentuan_id');
+        return $this->belongsTo(Ketentuan::class, 'ketentuan_id')->withDefault();
     }
 
     public function tanda_tangans(): HasMany
     {
-        return $this->hasMany(TandaTangan::class, 'pegawai_id');
+        return $this->hasMany(TandaTangan::class, 'pegawai_id')->withDefault();
     }
 
     public function data_perdins_diperintah(): HasMany
     {
-        return $this->hasMany(DataPerdin::class, 'pegawai_diperintah_id');
+        return $this->hasMany(DataPerdin::class, 'pegawai_diperintah_id')->withDefault();
     }
 
     public function data_perdin_mengikuti()
