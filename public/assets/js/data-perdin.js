@@ -1,10 +1,10 @@
 // Tanggal kembali otomatis
 function hitungTanggalKembali() {
     let tanggalBerangkat = $('#tgl_berangkat').val();
-    let lamaId = $('#lama_id').val();
-    let lama = parseInt($('#lama_id option:selected').data('lama'));
+    let lamaOption = $('#lama_id option:selected');
 
     if (tanggalBerangkat !== '' && !isNaN(lama)) {
+        let lama = parseInt(lamaOption.data('lama'));
         let tanggalKembali = new Date(tanggalBerangkat);
         tanggalKembali.setDate(tanggalKembali.getDate() + lama - 1);
 
