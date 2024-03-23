@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bidang;
 use App\Models\DataPerdin;
+use App\Models\Ketentuan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -64,10 +65,17 @@ class PageController extends Controller
             $morrisData[] = $data;
         }
 
+        $ketentuans = Ketentuan::all();
+        $nama_pegawai = $ketentuans->map(function ($item) {
+            return $item->pegawai->nama;
+        });
+
         return view('dashboard.index', [
             'title' => 'Home',
             'morrisData' => json_encode($morrisData),
             'totals' => $totals,
+            'ketentuans' => $ketentuans,
+            'nama_pegawai' => $nama_pegawai,
         ]);
     }
 }
